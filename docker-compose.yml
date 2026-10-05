@@ -1,0 +1,19 @@
+# Optional: real PostgreSQL for local dev, matching the intended stack.
+# Run:  docker compose up -d
+# Then set DATABASE_URL=postgresql+psycopg2://postgres:postgres@localhost:5432/skillgap in backend/.env
+version: "3.8"
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: skillgap
+    ports:
+      - "5432:5432"
+    volumes:
+      - skillgap_pgdata:/var/lib/postgresql/data
+
+volumes:
+  skillgap_pgdata:
